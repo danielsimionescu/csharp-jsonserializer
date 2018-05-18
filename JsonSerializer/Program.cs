@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,12 @@ namespace JsonSerializer
             var phoneAsJsonString = JsonConvert.SerializeObject(phone, Formatting.Indented);
             Console.WriteLine(phoneAsJsonString);
 
-            var phoneDeserialized = JsonConvert.DeserializeObject<Phone>(phoneAsJsonString);
+            File.WriteAllText("Phone.json", phoneAsJsonString);
+
+
+            var phoneStringFromFile = File.ReadAllText("Phone.json");
+
+            var phoneDeserialized = JsonConvert.DeserializeObject<Phone>(phoneStringFromFile);
             Console.WriteLine(phoneDeserialized);
 
             Console.ReadKey();
